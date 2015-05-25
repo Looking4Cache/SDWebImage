@@ -22,10 +22,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		2DA048541B12F77F00A2C1CC /* InfoMessageProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DA048531B12F77F00A2C1CC /* InfoMessageProtocol.h */; };
-		2DA048551B12F77F00A2C1CC /* InfoMessageProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DA048531B12F77F00A2C1CC /* InfoMessageProtocol.h */; };
-		2DA048561B12F77F00A2C1CC /* InfoMessageProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DA048531B12F77F00A2C1CC /* InfoMessageProtocol.h */; };
-		2DA048571B12F78B00A2C1CC /* InfoMessageProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DA048531B12F77F00A2C1CC /* InfoMessageProtocol.h */; };
 		4A2CAE041AB4BB5400B6BC39 /* WebImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A2CAE031AB4BB5400B6BC39 /* WebImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A2CAE181AB4BB6400B6BC39 /* SDWebImageCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 53922D88148C56230056699D /* SDWebImageCompat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A2CAE191AB4BB6400B6BC39 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 5340674F167780C40042B59E /* SDWebImageCompat.m */; };
@@ -251,7 +247,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2DA048531B12F77F00A2C1CC /* InfoMessageProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoMessageProtocol.h; sourceTree = "<group>"; };
 		4A2CADFF1AB4BB5300B6BC39 /* WebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A2CAE021AB4BB5400B6BC39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A2CAE031AB4BB5400B6BC39 /* WebImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebImage.h; sourceTree = "<group>"; };
@@ -469,7 +464,6 @@
 				53922D88148C56230056699D /* SDWebImageCompat.h */,
 				5340674F167780C40042B59E /* SDWebImageCompat.m */,
 				530E49E71646388E002868E7 /* SDWebImageOperation.h */,
-				2DA048531B12F77F00A2C1CC /* InfoMessageProtocol.h */,
 				53922DAB148C56810056699D /* Downloader */,
 				53922DAA148C56470056699D /* Cache */,
 				53922DAC148C56DD0056699D /* Utils */,
@@ -685,7 +679,6 @@
 				4A2CAE311AB4BB7500B6BC39 /* UIImage+WebP.h in Headers */,
 				4A2CAE2D1AB4BB7500B6BC39 /* UIImage+GIF.h in Headers */,
 				4A2CAE291AB4BB7500B6BC39 /* NSData+ImageContentType.h in Headers */,
-				2DA048571B12F78B00A2C1CC /* InfoMessageProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,7 +694,6 @@
 				531041D9157EAFA400BBABC3 /* SDWebImagePrefetcher.h in Headers */,
 				531041DA157EAFA400BBABC3 /* UIButton+WebCache.h in Headers */,
 				531041DB157EAFA400BBABC3 /* UIImageView+WebCache.h in Headers */,
-				2DA048561B12F77F00A2C1CC /* InfoMessageProtocol.h in Headers */,
 				531041DC157EAFA400BBABC3 /* MKAnnotationView+WebCache.h in Headers */,
 				530E49E916464C26002868E7 /* SDWebImageOperation.h in Headers */,
 				530E49EB16464C7F002868E7 /* SDWebImageDownloaderOperation.h in Headers */,
@@ -732,7 +724,6 @@
 				ABBE71A718C43B4D00B75E91 /* UIImageView+HighlightedWebCache.h in Headers */,
 				AB615303192DA24600A2D8E9 /* UIView+WebCacheOperation.h in Headers */,
 				A18A6CC7172DC28500419892 /* UIImage+GIF.h in Headers */,
-				2DA048541B12F77F00A2C1CC /* InfoMessageProtocol.h in Headers */,
 				53EDFB8A17623F7C00698166 /* UIImage+MultiFormat.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -755,7 +746,6 @@
 				DA577D411998E60B007367ED /* huffman_encode.h in Headers */,
 				537D95A517ECC1FE0097C263 /* SDWebImagePrefetcher.h in Headers */,
 				537D95A617ECC1FE0097C263 /* UIButton+WebCache.h in Headers */,
-				2DA048551B12F77F00A2C1CC /* InfoMessageProtocol.h in Headers */,
 				537D95A717ECC1FE0097C263 /* UIImageView+WebCache.h in Headers */,
 				537D95A817ECC1FE0097C263 /* SDWebImageOperation.h in Headers */,
 				537D95A917ECC1FE0097C263 /* SDWebImageDownloaderOperation.h in Headers */,

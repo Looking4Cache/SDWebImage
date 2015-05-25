@@ -62,10 +62,14 @@
         if (!finished) return;
         self.finishedCount++;
 
-        // L4C
-        NSString *logText = [NSString stringWithFormat:@"📷 %lu / %lu", (unsigned long)self.finishedCount, (unsigned long)self.prefetchURLs.count];
-        [self.infoMessageCreator performSelector:@selector(showInfoMessage:forNamedView:) withObject:logText withObject:@"SDWebImage"];
-
+        // L4C - Inform delegate
+        if ( self.infoMessageCreator ) {
+            if ( [self.infoMessageCreator respondsToSelector:@selector(showInfoMessage:forNamedView:)] ) {
+                NSString *logText = [NSString stringWithFormat:@"📷 %lu / %lu", (unsigned long)self.finishedCount, (unsigned long)self.prefetchURLs.count];
+                [self.infoMessageCreator performSelector:@selector(showInfoMessage:forNamedView:) withObject:logText withObject:@"SDWebImage"];
+            }
+        }
+        
         if (image) {
             if (self.progressBlock) {
                 self.progressBlock(self.finishedCount,[self.prefetchURLs count]);
