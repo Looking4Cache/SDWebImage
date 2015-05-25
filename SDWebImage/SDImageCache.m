@@ -104,7 +104,11 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
         _diskCachePath = [self makeDiskCachePath:fullNamespace];
 
         // Set decompression to YES
-        _shouldDecompressImages = YES;
+        //_shouldDecompressImages = YES;
+
+        // L4C
+        _shouldDecompressImages = NO;
+        [self setMaxMemoryCountLimit:30];
 
         dispatch_sync(_ioQueue, ^{
             _fileManager = [NSFileManager new];

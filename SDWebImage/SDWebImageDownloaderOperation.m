@@ -51,7 +51,11 @@ NSString *const SDWebImageDownloadFinishNotification = @"SDWebImageDownloadFinis
             cancelled:(SDWebImageNoParamsBlock)cancelBlock {
     if ((self = [super init])) {
         _request = request;
-        _shouldDecompressImages = YES;
+
+        // L4C
+        //_shouldDecompressImages = YES;
+        _shouldDecompressImages = NO;
+        
         _shouldUseCredentialStorage = YES;
         _options = options;
         _progressBlock = [progressBlock copy];
