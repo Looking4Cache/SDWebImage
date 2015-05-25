@@ -43,6 +43,9 @@ typedef void(^SDWebImagePrefetcherCompletionBlock)(NSUInteger noOfFinishedUrls, 
  */
 @interface SDWebImagePrefetcher : NSObject
 
+// L4C
+@property (nonatomic, strong) NSObject *infoMessageCreator;
+
 /**
  *  The web image manager
  */

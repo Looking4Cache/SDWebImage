@@ -54,12 +54,17 @@
     return self.manager.imageDownloader.maxConcurrentDownloads;
 }
 
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 - (void)startPrefetchingAtIndex:(NSUInteger)index {
     if (index >= self.prefetchURLs.count) return;
     self.requestedCount++;
     [self.manager downloadImageWithURL:self.prefetchURLs[index] options:self.options progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
         if (!finished) return;
         self.finishedCount++;
+
+        // L4C
+        NSString *logText = [NSString stringWithFormat:@"📷 %lu / %lu", (unsigned long)self.finishedCount, (unsigned long)self.prefetchURLs.count];
+        [self.infoMessageCreator performSelector:@selector(showInfoMessage:forNamedView:) withObject:logText withObject:@"SDWebImage"];
 
         if (image) {
             if (self.progressBlock) {
