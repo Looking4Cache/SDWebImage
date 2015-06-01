@@ -30,15 +30,17 @@
     }
 #endif
     else {
-        image = [[UIImage alloc] initWithData:data];
-        UIImageOrientation orientation = [self sd_imageOrientationFromImageData:data];
-        if (orientation != UIImageOrientationUp) {
-            image = [UIImage imageWithCGImage:image.CGImage
-                                        scale:image.scale
-                                  orientation:orientation];
+        CGImageSourceRef imageSource = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
+        if (imageSource && CGImageSourceGetCount(imageSource) > 0) {
+            image = [[UIImage alloc] initWithData:data];
+            UIImageOrientation orientation = [self sd_imageOrientationFromImageData:data];
+            if (orientation != UIImageOrientationUp) {
+                image = [UIImage imageWithCGImage:image.CGImage
+                                            scale:image.scale
+                                      orientation:orientation];
+            }
         }
     }
-
 
     return image;
 }
