@@ -18,6 +18,9 @@
 @implementation UIImage (MultiFormat)
 
 + (UIImage *)sd_imageWithData:(NSData *)data {
+    // L4C: Just return the UIImage
+    return [UIImage imageWithData:data];
+    /*
     if (!data) {
         return nil;
     }
@@ -47,6 +50,7 @@
     }
 
     return image;
+    */
 }
 
 
