@@ -269,4 +269,7 @@ typedef void(^SDWebImageCalculateSizeBlock)(NSUInteger fileCount, NSUInteger tot
  */
 - (NSString *)defaultCachePathForKey:(NSString *)key;
 
+// L4C
+- (NSString *)cachedFileNameForKey:(NSString *)key;
+
 @end
