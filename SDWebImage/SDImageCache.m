@@ -60,8 +60,7 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 @interface SDImageCache ()
 
 @property (strong, nonatomic) NSCache *memCache;
-// L4C
-//@property (strong, nonatomic) NSString *diskCachePath;
+@property (strong, nonatomic) NSString *diskCachePath;
 @property (strong, nonatomic) NSMutableArray *customPaths;
 @property (SDDispatchQueueSetterSementics, nonatomic) dispatch_queue_t ioQueue;
 
@@ -432,6 +431,40 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
         completion();
     }
     
+}
+
+// L4C
+- (NSUInteger)removeAllImagesExceptKey:(NSArray *)keys {
+    NSMutableArray *imageFilenames = [[NSMutableArray alloc] init];
+    for (NSString *imageURL in keys) {
+        NSURL *url = [NSURL URLWithString:imageURL];
+        NSString *filename = [self cachedFileNameForKey:[url absoluteString]];
+        [imageFilenames addObject:filename];
+    }
+    
+    NSMutableArray *urlsToDelete = [[NSMutableArray alloc] init];
+    
+    NSDirectoryEnumerator *fileEnumerator = [_fileManager enumeratorAtURL:[NSURL URLWithString:self.diskCachePath]
+                                               includingPropertiesForKeys:@[NSURLNameKey]
+                                                                  options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                             errorHandler:nil];
+    NSURL *file;
+    while (file = [fileEnumerator nextObject]) {
+        if ( ![imageFilenames containsObject:file.lastPathComponent] ) {
+            // NSURL *fileURL = fileEnumerator.path
+            [urlsToDelete addObject:file];
+        }
+    }
+    
+    for (NSURL *fileToDelete in urlsToDelete) {
+        [[NSFileManager defaultManager] removeItemAtURL:fileToDelete error:nil];
+    }
+    
+    if (self.shouldCacheImagesInMemory) {
+        [self clearMemory];
+    }
+    
+    return urlsToDelete.count;
 }
 
 - (void)setMaxMemoryCost:(NSUInteger)maxMemoryCost {

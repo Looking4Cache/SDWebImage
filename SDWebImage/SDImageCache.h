@@ -72,9 +72,6 @@ typedef void(^SDWebImageCalculateSizeBlock)(NSUInteger fileCount, NSUInteger tot
  */
 @property (assign, nonatomic) NSUInteger maxCacheSize;
 
-// L4C
-@property (strong, nonatomic) NSString *diskCachePath;
-
 /**
  * Returns global shared cache instance
  *
@@ -191,6 +188,14 @@ typedef void(^SDWebImageCalculateSizeBlock)(NSUInteger fileCount, NSUInteger tot
  */
 - (void)removeImageForKey:(NSString *)key fromDisk:(BOOL)fromDisk withCompletion:(SDWebImageNoParamsBlock)completion;
 
+// L4C
+/**
+ * Removes all images synchronously not contained in the key-array
+ *
+ * @param key The unique image cache key
+ */
+- (NSUInteger)removeAllImagesExceptKey:(NSArray *)keys;
+
 /**
  * Clear all memory cached images
  */
@@ -271,8 +276,5 @@ typedef void(^SDWebImageCalculateSizeBlock)(NSUInteger fileCount, NSUInteger tot
  *  @return the default cache path
  */
 - (NSString *)defaultCachePathForKey:(NSString *)key;
-
-// L4C
-- (NSString *)cachedFileNameForKey:(NSString *)key;
 
 @end
