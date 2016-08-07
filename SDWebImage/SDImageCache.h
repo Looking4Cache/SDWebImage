@@ -72,6 +72,9 @@ typedef void(^SDWebImageCalculateSizeBlock)(NSUInteger fileCount, NSUInteger tot
  */
 @property (assign, nonatomic) NSUInteger maxCacheSize;
 
+// L4C
+@property (strong, nonatomic) NSString *diskCachePath;
+
 /**
  * Returns global shared cache instance
  *
