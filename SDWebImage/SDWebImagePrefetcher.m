@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) SDWebImageManager *manager;
 @property (strong, nonatomic) NSArray *prefetchURLs;
+@property (strong, nonatomic) NSMutableArray *prefetchURLsMissing;
 @property (assign, nonatomic) NSUInteger requestedCount;
 @property (assign, nonatomic) NSUInteger skippedCount;
 @property (assign, nonatomic) NSUInteger finishedCount;
@@ -61,7 +62,12 @@
     [self.manager downloadImageWithURL:self.prefetchURLs[index] options:self.options progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
         if (!finished) return;
         self.finishedCount++;
-
+        
+        // L4C - Remove from missing
+        @synchronized (self.prefetchURLsMissing) {
+            [self.prefetchURLsMissing removeObject:self.prefetchURLs[index]];
+        }
+        
         // L4C - Inform delegate
         if ( self.infoMessageCreator ) {
             if ( [self.infoMessageCreator respondsToSelector:@selector(showInfoMessage:forNamedView:)] ) {
@@ -81,7 +87,7 @@
                 self.progressBlock(self.finishedCount,[self.prefetchURLs count]);
             }
             //NSLog(@"Prefetched %@ out of %@ (Failed)", @(self.finishedCount), @(self.prefetchURLs.count));
-
+            
             // Add last failed
             self.skippedCount++;
         }
@@ -90,7 +96,7 @@
                             didPrefetchURL:self.prefetchURLs[index]
                              finishedCount:self.finishedCount
                                 totalCount:self.prefetchURLs.count
-            ];
+             ];
         }
         if (self.prefetchURLs.count > self.requestedCount) {
             dispatch_async(self.prefetcherQueue, ^{
@@ -115,7 +121,7 @@
         [self.delegate imagePrefetcher:self
                didFinishWithTotalCount:(total - self.skippedCount)
                           skippedCount:self.skippedCount
-        ];
+         ];
     }
 }
 
@@ -126,11 +132,20 @@
 - (void)prefetchURLs:(NSArray *)urls progress:(SDWebImagePrefetcherProgressBlock)progressBlock completed:(SDWebImagePrefetcherCompletionBlock)completionBlock {
     [self cancelPrefetching]; // Prevent duplicate prefetch request
     self.startedTime = CFAbsoluteTimeGetCurrent();
-    self.prefetchURLs = urls;
+    
+    // L4C - Don´t skip old prefetches
+    NSMutableSet *urlSet = [[NSMutableSet alloc] init];
+    if ( self.prefetchURLsMissing ) {
+        [urlSet addObjectsFromArray:self.prefetchURLsMissing];
+    }
+    [urlSet addObjectsFromArray:urls];
+    self.prefetchURLs = [urlSet allObjects];
+    self.prefetchURLsMissing = [self.prefetchURLs mutableCopy];
+    
     self.completionBlock = completionBlock;
     self.progressBlock = progressBlock;
-
-    if(urls.count == 0){ 
+    
+    if(urls.count == 0){
         if(completionBlock){
             completionBlock(0,0);
         }
